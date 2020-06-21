@@ -10,6 +10,9 @@
 The higher the speed, the more speeding is possible. Don't use minus (one minus is a multiple), use ratio to measure.
 The high-speed and low-speed rewards should be similar. Speed up a little bit harder, because defining the domain width will slow him down
 The values of the incoming vectors should not differ by too many orders of magnitude, otherwise it will not converge, it is not easy to learn, and the graph will fluctuate greatly, which is not good-looking
+
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_21.png)
+ ![image](https://github.com/ZHONGJunjie86/A3C-single-car-intersection/blob/master/illustrate/illustrate.gif )   
+  ![image](https://github.com/ZHONGJunjie86/A3C-single-car-intersection/blob/master/illustrate/A2C-Architecture.JPG) 
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_20_%E5%AD%A6%E4%B9%A0%E7%8E%870-001%E7%A8%B3%E5%AE%9A%E4%B8%8D%E6%94%B6%E6%95%9B.png)
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_19_lr%E5%87%8F%E5%BE%97%E5%A4%AA%E6%85%A2%EF%BC%9F.png)
