@@ -4,7 +4,7 @@
 　This is a basic model describing a car runs to goal in limited time by using A2C algorithm to control its accelerate.
 　To see model's details from [my previous work](https://github.com/ZHONGJunjie86/A3C-single-car-intersection).
 # Reward shaping 
-　
+　<a href="https://www.codecogs.com/eqnedit.php?latex=\bigtriangledown&space;R&space;=&space;\frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}&plus;V_{s&plus;1}^{n}-V_{s}^{n})\bigtriangledown&space;log&space;P_{\Theta&space;}(a_{t}^{n}|s_{t}^{n})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\bigtriangledown&space;R&space;=&space;\frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}&plus;V_{s&plus;1}^{n}-V_{s}^{n})\bigtriangledown&space;log&space;P_{\Theta&space;}(a_{t}^{n}|s_{t}^{n})" title="\bigtriangledown R = \frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}+V_{s+1}^{n}-V_{s}^{n})\bigtriangledown log P_{\Theta }(a_{t}^{n}|s_{t}^{n})" /></a>
 # tips
    Let him slow down a little bit first, and then learn to speed up; once he learns faster, he can't slow down, because he can reduce the points caused by the number of rounds. Each round's reduction in time should be reduced more for slower chances
 The higher the speed, the more speeding is possible. Don't use minus (one minus is a multiple), use ratio to measure.
