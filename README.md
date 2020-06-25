@@ -5,8 +5,10 @@
 　Go to see MC-model from [my previous work](https://github.com/ZHONGJunjie86/A3C-single-car-intersection).
 # Reward shaping
 　The work in this model is very simple.   
-　Input [real_speed, target_speed, elapsed_time_ratio, distance_to_goal,reward,done,time_pass,over]    
+　Input [real_speed, target_speed, elapsed_time_ratio, distance_to_goal,reward,done,time_pass,over]
+　Station representation: [real_speed, target_speed, elapsed_time_ratio, distance_to_goal]
 　Output accelerate.
+　Action representation [accelerate].
   
 　The car will learn to control its accelerate with the restructions shown below:  
 　Reward shaping:  
@@ -35,13 +37,39 @@
 
 　<a href="https://www.codecogs.com/eqnedit.php?latex=\bigtriangledown&space;R&space;=&space;\frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}&plus;V_{s&plus;1}^{n}-V_{s}^{n})\bigtriangledown&space;log&space;P_{\Theta&space;}(a_{t}^{n}|s_{t}^{n})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\bigtriangledown&space;R&space;=&space;\frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}&plus;V_{s&plus;1}^{n}-V_{s}^{n})\bigtriangledown&space;log&space;P_{\Theta&space;}(a_{t}^{n}|s_{t}^{n})" title="\bigtriangledown R = \frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}+V_{s+1}^{n}-V_{s}^{n})\bigtriangledown log P_{\Theta }(a_{t}^{n}|s_{t}^{n})" /></a>
 # Hyperparameter optimization
-   Let him slow down a little bit first, and then learn to speed up; once he learns faster, he can't slow down, because he can reduce the points caused by the number of rounds. Each round's reduction in time should be reduced more for slower chances
-The higher the speed, the more speeding is possible. Don't use minus (one minus is a multiple), use ratio to measure.
-The high-speed and low-speed rewards should be similar. Speed up a little bit harder, because defining the domain width will slow him down
-The values of the incoming vectors should not differ by too many orders of magnitude, otherwise it will not converge, it is not easy to learn, and the graph will fluctuate greatly, which is not good-looking
+　Station representation: [real_speed, target_speed, elapsed_time_ratio, distance_to_goal]
+　Action representation [accelerate].
+### Rewards' value is very small
+　I use sigmiod funtion as the actor/critic network's output layer which can output positive or negative values.
+　To prevent vanishing gradient problem the value used for backpropagate should be close to 0.
+### The agent was trying to reach a very fast speed to reduce steps and thus penalties
+* r speed： related to the target speed  
+* if sa ≤st: 0.05 - 0.033*(target_speed / real_speed) 
+* if sa > st: 0.05 - 0.036*(real_speed / target_speed )   
+　So the faster the speed, the greater the penalty. The same goes for the very low speed. 
+　The value of reward-speed can be positive or negative.
+　Over or under speeding is be balanced.
+### Over time penalty
+　-0.013(target_speed > real_speed) or  -0.01(target_speed < real_speed)：crash / time expires 
+　The formost issue is acceleration, so the value of over time penalty should much smaller than the value of reward-speed.
+　The reason 0.013>0.01 is that lower speed over time is more likely.
+### Input's and output's value should not be too different 
+　In fact the values sent from the GAMA side is [real_speed/10, target_speed/10, elapsed_time_ratio, distance_left/100,reward,done,over].
+　SO the station representation is [real_speed/10, target_speed/10, elapsed_time_ratio, distance_left/100].
+　And the action representation is [accelerate*10].
+　In this way, the loss will not violently oscillate and the image of learning curve will be more cognizable.
+### Learning rate weakened
+            if episode > 50 : 
+                new_lr = lr * (0.94 ** ((episode-40) // 10)) 
+                optimizerA = optim.Adam(actor.parameters(), new_lr, betas=(0.95, 0.999))
+                optimizerC = optim.Adam(critic.parameters(), new_lr, betas=(0.95, 0.999))
 
+ ### Final result
+　The TD algorithm convergent convergents within 300 cycles.  
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_21.png)
+### Learning rate isn't weakened
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_20_%E5%AD%A6%E4%B9%A0%E7%8E%870-001%E7%A8%B3%E5%AE%9A%E4%B8%8D%E6%94%B6%E6%95%9B.png)
+### Learning rate is weakened too late
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_19_lr%E5%87%8F%E5%BE%97%E5%A4%AA%E6%85%A2%EF%BC%9F.png)
 
 # About GAMA
