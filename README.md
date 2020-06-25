@@ -37,7 +37,7 @@
 
 　<a href="https://www.codecogs.com/eqnedit.php?latex=\bigtriangledown&space;R&space;=&space;\frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}&plus;V_{s&plus;1}^{n}-V_{s}^{n})\bigtriangledown&space;log&space;P_{\Theta&space;}(a_{t}^{n}|s_{t}^{n})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\bigtriangledown&space;R&space;=&space;\frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}&plus;V_{s&plus;1}^{n}-V_{s}^{n})\bigtriangledown&space;log&space;P_{\Theta&space;}(a_{t}^{n}|s_{t}^{n})" title="\bigtriangledown R = \frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}+V_{s+1}^{n}-V_{s}^{n})\bigtriangledown log P_{\Theta }(a_{t}^{n}|s_{t}^{n})" /></a>
 # Hyperparameter optimization
-　Station representation: [real_speed, target_speed, elapsed_time_ratio, distance_to_goal]
+　Station representation: [real_speed, target_speed, elapsed_time_ratio, distance_to_goal]  
 　Action representation [accelerate].
 ### Rewards' value is very small
 　I use sigmiod funtion as the actor/critic network's output layer which can output positive or negative values.
@@ -65,7 +65,7 @@
                 optimizerC = optim.Adam(critic.parameters(), new_lr, betas=(0.95, 0.999))
 
  ### Final result
-　The TD algorithm convergent convergents within 300 cycles.  
+　The TD algorithm convergents within 300 cycles.  
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_21.png)
 ### Learning rate isn't weakened
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_20_%E5%AD%A6%E4%B9%A0%E7%8E%870-001%E7%A8%B3%E5%AE%9A%E4%B8%8D%E6%94%B6%E6%95%9B.png)
