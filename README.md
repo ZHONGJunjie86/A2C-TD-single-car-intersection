@@ -19,8 +19,7 @@
 * if sa ≤st: 0.05 - 0.036*(target_speed / real_speed) 
 * if sa > st: 0.05 - 0.033*(real_speed / target_speed ) 
 
-　In my experiment it's obviously I desire the agent to learn controling its speed around the target-speed.    
- 　[Go to see my hyperparameter optimization](https://github.com/ZHONGJunjie86/A3C-single-car-intersection)
+　In my experiment it's obviously I desire the agent to learn controling its speed around the target-speed.   
 
   # Experiment
   ###### gama:
