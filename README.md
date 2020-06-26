@@ -31,14 +31,14 @@
            final_target <- node_agt(random_node).location;	
            location <- any_location_in(node_agt(5)); 
 　There are 12 nodes in the intersection map and the start point is fixed at the 5th point. Every time before a cycle there will be a random number between 0 and 12 used to choose destination node. And the target-time and target speed will also be changed.   
-　In other words, I let the agent to learn 3*11=33 situations.  　The rewards depend on the situation, so it will change every cycle.  
+### In other words, I let the agent to learn 3*11=33 situations.  　The rewards depend on the situation, so it will change every cycle.  
  ### The model will be trained every step. 
 
 　<a href="https://www.codecogs.com/eqnedit.php?latex=\bigtriangledown&space;R&space;=&space;\frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}&plus;V_{s&plus;1}^{n}-V_{s}^{n})\bigtriangledown&space;log&space;P_{\Theta&space;}(a_{t}^{n}|s_{t}^{n})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\bigtriangledown&space;R&space;=&space;\frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}&plus;V_{s&plus;1}^{n}-V_{s}^{n})\bigtriangledown&space;log&space;P_{\Theta&space;}(a_{t}^{n}|s_{t}^{n})" title="\bigtriangledown R = \frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}+V_{s+1}^{n}-V_{s}^{n})\bigtriangledown log P_{\Theta }(a_{t}^{n}|s_{t}^{n})" /></a>
 # Hyperparameter optimization
 　Station representation: [real_speed, target_speed, elapsed_time_ratio, distance_to_goal]  
 　Action representation [accelerate].
-### Rewards' value is very small
+### representations' values are very small
 　I use sigmiod funtion as the actor/critic network's output layer which can output positive or negative values.
 　To prevent vanishing gradient problem the value used for backpropagate should be close to 0.
 ### The agent was trying to reach a very fast speed to reduce steps and thus penalties
