@@ -38,37 +38,37 @@
 # Hyperparameter optimization
 　Station representation: [real_speed, target_speed, elapsed_time_ratio, distance_to_goal]  
 　Action representation [accelerate].
-### representations' values are very small
+## representations' values are very small
 　I use sigmiod funtion as the actor/critic network's output layer which can output positive or negative values.
 　To prevent vanishing gradient problem the value used for backpropagate should be close to 0.
-### The agent was trying to reach a very fast speed to reduce steps and thus penalties
+## The agent was trying to reach a very fast speed to reduce steps and thus penalties
 * r speed： related to the target speed  
 * if sa ≤st: 0.05 - 0.033*(target_speed / real_speed) 
 * if sa > st: 0.05 - 0.036*(real_speed / target_speed )   
 　So the faster the speed, the greater the penalty. The same goes for the very low speed. 
 　The value of reward-speed can be positive or negative.
 　Over or under speeding is be balanced.
-### Over time penalty
+## Over time penalty
 　-0.013(target_speed > real_speed) or  -0.01(target_speed < real_speed)：crash / time expires 
 　The formost issue is acceleration, so the value of over time penalty should much smaller than the value of reward-speed.
-　The reason 0.013>0.01 is that lower speed over time is more likely.
-### Input's and output's value should not be too different 
+　The reason 0.013>0.01 is that lower speeds lead to  over time more likely.
+## Input's and output's values should not be too different 
 　In fact the values sent from the GAMA side is [real_speed/10, target_speed/10, elapsed_time_ratio, distance_left/100,reward,done,over].
 　SO the station representation is [real_speed/10, target_speed/10, elapsed_time_ratio, distance_left/100].
 　And the action representation is [accelerate*10].
 　In this way, the loss will not violently oscillate and the image of learning curve will be more cognizable.
-### Learning rate weakened
+## Learning rate weakened
             if episode > 50 : 
                 new_lr = lr * (0.94 ** ((episode-40) // 10)) 
                 optimizerA = optim.Adam(actor.parameters(), new_lr, betas=(0.95, 0.999))
                 optimizerC = optim.Adam(critic.parameters(), new_lr, betas=(0.95, 0.999))
 
- ### Final result
+ ## Final result
 　The TD algorithm convergents within 300 cycles.  
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_21.png)
-### Learning rate isn't weakened
+## Learning rate isn't weakened
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_20_%E5%AD%A6%E4%B9%A0%E7%8E%870-001%E7%A8%B3%E5%AE%9A%E4%B8%8D%E6%94%B6%E6%95%9B.png)
-### Learning rate is weakened too late
+## Learning rate is weakened too late
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_19_lr%E5%87%8F%E5%BE%97%E5%A4%AA%E6%85%A2%EF%BC%9F.png)
 
 # About GAMA
