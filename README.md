@@ -3,6 +3,8 @@
 　It is the MC algorithm can't learn every stuation preciously due to be trained only once in the end of a cycle.  
 　This is a basic model describing a car runs to goal in limited time by using A2C algorithm to determine its accelerate.
 　Go to see MC-model from [my previous work](https://github.com/ZHONGJunjie86/A3C-single-car-intersection).    
+ 　　　　
+     　　
    ![image](https://github.com/ZHONGJunjie86/A3C-single-car-intersection/blob/master/illustrate/illustrate.gif )   
 # Reward shaping
 　The work in this model is very simple.   
