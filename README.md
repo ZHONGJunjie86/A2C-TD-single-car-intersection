@@ -2,7 +2,7 @@
 　When I noticed the A2C-MC does not convergent, I turned to use the A2C-TD algorithm which the paper used. 
 　It is the MC algorithm can't learn every stuation preciously due to be trained only once in the end of a cycle.  
 　This is a basic model describing a car runs to goal in limited time by using A2C algorithm to determine its accelerate.
-　Go to see MC-model from [my previous work](https://github.com/ZHONGJunjie86/A3C-single-car-intersection).
+　Go to see MC-model from [my previous work](https://github.com/ZHONGJunjie86/A3C-single-car-intersection).    
    ![image](https://github.com/ZHONGJunjie86/A3C-single-car-intersection/blob/master/illustrate/illustrate.gif )   
 # Reward shaping
 　The work in this model is very simple.   
@@ -33,7 +33,7 @@
            location <- any_location_in(node_agt(5)); 
 　There are 12 nodes in the intersection map and the start point is fixed at the 5th point. Every time before a cycle there will be a random number between 0 and 12 used to choose destination node. And the target-time and target speed will also be changed.   
 #### In other words, I let the agent to learn 3*11=33 situations.  　The rewards depend on the situation, so it will change every cycle.  
-#### The model will be trained every step. 
+#### The model will be trained every step(TD). 
 
 　<a href="https://www.codecogs.com/eqnedit.php?latex=\bigtriangledown&space;R&space;=&space;\frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}&plus;V_{s&plus;1}^{n}-V_{s}^{n})\bigtriangledown&space;log&space;P_{\Theta&space;}(a_{t}^{n}|s_{t}^{n})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\bigtriangledown&space;R&space;=&space;\frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}&plus;V_{s&plus;1}^{n}-V_{s}^{n})\bigtriangledown&space;log&space;P_{\Theta&space;}(a_{t}^{n}|s_{t}^{n})" title="\bigtriangledown R = \frac{1}{N}\sum_{n=1}^{N}\sum_{t=1}^{T}(r_{t}+V_{s+1}^{n}-V_{s}^{n})\bigtriangledown log P_{\Theta }(a_{t}^{n}|s_{t}^{n})" /></a>
 # Hyperparameter optimization
