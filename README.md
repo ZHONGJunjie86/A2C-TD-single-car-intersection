@@ -42,7 +42,8 @@
 　Station representation: [real_speed, target_speed, elapsed_time_ratio, distance_to_goal]  
 　Action representation [accelerate].
 ## representations' values are very small
-　I use sigmiod funtion as the actor/critic network's output layer which can output positive or negative values.
+### tanh funtion --accelerate can be positive or negative value
+　I use tanh funtion as the actor/critic network's output layer which can output positive or negative values.
 　To prevent vanishing gradient problem the value used for backpropagate should be close to 0.
 ## The agent was trying to reach a very fast speed to reduce steps and thus penalties
 * r speed： related to the target speed  
