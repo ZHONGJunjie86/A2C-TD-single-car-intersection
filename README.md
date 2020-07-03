@@ -5,7 +5,7 @@
 　Go to see MC-model from [my previous work](https://github.com/ZHONGJunjie86/A3C-single-car-intersection).    
  　　　　
      　　
-   ![image](https://github.com/ZHONGJunjie86/A3C-single-car-intersection/blob/master/illustrate/illustrate.gif )   
+   ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/illustration_1.gif )   
 # Reward shaping
 　The work in this model is very simple.   
 　Input [real_speed, target_speed, elapsed_time_ratio, distance_to_goal,reward,done,time_pass,over]
@@ -43,7 +43,8 @@
 　Action representation [accelerate].
 ## representations' values are very small
 ### tanh funtion --accelerate can be positive or negative value
-　I use tanh funtion as the actor/critic network's output layer which can output positive or negative values.
+### sigmoid funtion --accelerate can only be positive (learning fastly)
+　I use tanh funtion as the actor/critic network's output layer which can output positive or negative values, while  I use sigmoid funtion as the actor/critic network's output layer which can only output positive values(speed up only).
 　To prevent vanishing gradient problem the value used for backpropagate should be close to 0.
 ## The agent was trying to reach a very fast speed to reduce steps and thus penalties
 * r speed： related to the target speed  
@@ -69,8 +70,10 @@
 
  ## Final result
 　The TD algorithm convergents within 800 cycles.  
-## 
-## Only speed up (acceleration > 0 )
+## (acceleration > 0 OR acceleration > 0; tanh)
+![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_tanh.png)
+## Learning rate isn't weakened
+## Only speed up (acceleration > 0; sigmoid)
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_21.png)
 ## Learning rate isn't weakened
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_20_%E5%AD%A6%E4%B9%A0%E7%8E%870-001%E7%A8%B3%E5%AE%9A%E4%B8%8D%E6%94%B6%E6%95%9B.png)
