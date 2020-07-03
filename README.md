@@ -72,7 +72,6 @@
 　The TD algorithm convergents within 800 cycles.  
 ## (acceleration > 0 OR acceleration < 0; tanh())
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_tanh.png)
-## Learning rate isn't weakened
 ## Only speed up (acceleration > 0; sigmoid())
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_21.png)
 ## Learning rate isn't weakened
