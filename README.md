@@ -1,7 +1,7 @@
 # A2C-TD-single-car-intersection
 　When I noticed the A2C-MC does not convergent, I turned to use the A2C-TD algorithm which the paper used. 
 　It is the MC algorithm can't learn every stuation preciously due to be trained only once in the end of a cycle.  
-　This is a basic model describing a car runs to goal in limited time by using A2C algorithm to determine its accelerate.
+　This is a basic model describing a car runs to goal in limited time by using A2C algorithm to determine its acceleration.
 　Go to see MC-model from [my previous work](https://github.com/ZHONGJunjie86/A3C-single-car-intersection).    
  　　　　
      　　
@@ -68,7 +68,9 @@
                 optimizerC = optim.Adam(critic.parameters(), new_lr, betas=(0.95, 0.999))
 
  ## Final result
-　The TD algorithm convergents within 300 cycles.  
+　The TD algorithm convergents within 800 cycles.  
+## 
+## Only speed up (acceleration > 0 )
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_21.png)
 ## Learning rate isn't weakened
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_20_%E5%AD%A6%E4%B9%A0%E7%8E%870-001%E7%A8%B3%E5%AE%9A%E4%B8%8D%E6%94%B6%E6%95%9B.png)
