@@ -42,8 +42,8 @@
 　Station representation: [real_speed, target_speed, elapsed_time_ratio, distance_to_goal]  
 　Action representation [accelerate].
 ## representations' values are very small
-### tanh funtion --accelerate can be positive or negative value
-### sigmoid funtion --accelerate can only be positive (learning fastly)
+### tanh funtion --acceleration can be positive or negative values
+### sigmoid funtion --acceleration can only be positive values (learning faster)
 　I use tanh funtion as the actor/critic network's output layer which can output positive or negative values, while  I use sigmoid funtion as the actor/critic network's output layer which can only output positive values(speed up only).
 　To prevent vanishing gradient problem the value used for backpropagate should be close to 0.
 ## The agent was trying to reach a very fast speed to reduce steps and thus penalties
@@ -70,10 +70,10 @@
 
  ## Final result
 　The TD algorithm convergents within 800 cycles.  
-## (acceleration > 0 OR acceleration > 0; tanh)
+## (acceleration > 0 OR acceleration < 0; tanh())
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_tanh.png)
 ## Learning rate isn't weakened
-## Only speed up (acceleration > 0; sigmoid)
+## Only speed up (acceleration > 0; sigmoid())
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_21.png)
 ## Learning rate isn't weakened
 ![image](https://github.com/ZHONGJunjie86/A2C-TD-single-car-intersection/blob/master/illustrate/loss_curve_TD_20_%E5%AD%A6%E4%B9%A0%E7%8E%870-001%E7%A8%B3%E5%AE%9A%E4%B8%8D%E6%94%B6%E6%95%9B.png)
